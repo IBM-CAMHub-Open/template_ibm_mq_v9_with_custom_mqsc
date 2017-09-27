@@ -1,1 +1,1 @@
-# template_ibm_mq_v9_with_custom_mqsc
+Copyright IBM Corp. 2017, 2017
