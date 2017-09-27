@@ -1,0 +1,1 @@
+# template_ibm_mq_v9_with_custom_mqsc
