@@ -26,10 +26,6 @@
     {
       "name": "mqv9node01",
       "label": "MQV9Node01"
-    },
-    {
-      "name": "ungrouped",
-      "label": "ungrouped"
     }
   ],
   "output_groups": [
@@ -102,6 +98,17 @@
           "label": "True"
         }
       ],
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "MQV9Node01_domain",
+      "type": "string",
+      "description": "Domain Name of virtual machine",
+      "hidden": false,
+      "label": "Domain Name - MQV9Node01",
+      "secured": false,
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
@@ -721,6 +728,18 @@
       "group_name": "virtualmachine"
     },
     {
+      "name": "wmq_mqsc_script_url",
+      "type": "string",
+      "description": "Generated",
+      "default": "none",
+      "hidden": false,
+      "label": "Wmq Mqsc Script Url - MQV9Node01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "mqv9node01"
+    },
+    {
       "name": "MQV9Node01_cluster",
       "type": "string",
       "description": "Target vSphere cluster to host the virtual machine",
@@ -764,18 +783,6 @@
       "required": true,
       "immutable": false,
       "group_name": "ssh_keys"
-    },
-    {
-      "name": "wmq_mqsc_script_url",
-      "type": "string",
-      "description": "Generated",
-      "default": "none",
-      "hidden": false,
-      "label": "Wmq Mqsc Script Url - ungrouped",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "ungrouped"
     }
   ],
   "template_output_params": [

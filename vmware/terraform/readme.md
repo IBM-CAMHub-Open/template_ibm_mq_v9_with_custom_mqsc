@@ -1,9 +1,9 @@
-# Template - IBM MQ Series V9 with custom script on a single VM
+# Template - IBM MQ Series V9 with custom script on a single virtual machine
 Template Version - 1.0
 
 ## Description
 
-Install and configure IBM MQ on a single Linux Node,configuring a Queue Manager <br>and run a 'bring your own script'.<br>
+Install and configure IBM MQ on a single Linux Node, configuring a Queue Manager<br>and executes a 'bring your own script' function.<br>
 
 ## Features
 
@@ -37,8 +37,8 @@ IBM MQ Series V9.0<br>
 ### Usage and Special Notes
 
 1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>
-2. IBM Knowledge Center for IBM MQ Series 9.0 - https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.htm<br>
-3. IBM Support Portal - https://www.ibm.com/support/home/<br>
+2. IBM Knowledge Center for IBM MQ Series 9.0 - <a href=\"https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.htm\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.htm</a><br>
+3. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>
 <br>
 
 

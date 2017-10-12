@@ -284,7 +284,6 @@ variable "MQV9Node01_wmq_version" {
   default     = "9.0"
 }
 
-##### ungrouped variables #####
 #Variable : wmq_mqsc_script_url
 variable "wmq_mqsc_script_url" {
   type        = "string"
@@ -295,6 +294,11 @@ variable "wmq_mqsc_script_url" {
 #########################################################
 ##### Resource : MQV9Node01
 #########################################################
+
+variable "MQV9Node01_domain" {
+  type        = "string"
+  description = "Domain Name of virtual machine"
+}
 
 variable "MQV9Node01-os_password" {
   type        = "string"
@@ -381,6 +385,7 @@ resource "vsphere_virtual_machine" "MQV9Node01" {
   cluster      = "${var.MQV9Node01_cluster}"
   dns_suffixes = "${var.MQV9Node01_dns_suffixes}"
   dns_servers  = "${var.MQV9Node01_dns_servers}"
+  domain       = "${var.MQV9Node01_domain}"
 
   network_interface {
     label              = "${var.MQV9Node01_network_interface_label}"
