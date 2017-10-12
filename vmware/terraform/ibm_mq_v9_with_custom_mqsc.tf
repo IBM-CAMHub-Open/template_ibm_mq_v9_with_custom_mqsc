@@ -9,12 +9,12 @@
 # This is a terraform generated template generated from ibm_mq_v9_with_custom_mqsc
 
 ##############################################################
-# Keys - CAMC (public/private) & optional User Key (public)
+# Keys - CAMC (public/private) & optional User Key (public) 
 ##############################################################
 variable "user_public_ssh_key" {
-  type        = "string"
+  type = "string"
   description = "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH."
-  default     = "None"
+  default = "None"
 }
 
 variable "ibm_pm_public_ssh_key" {
@@ -27,11 +27,11 @@ variable "ibm_pm_private_ssh_key" {
 
 variable "allow_unverified_ssl" {
   description = "Communication with vsphere server with self signed certificate"
-  default     = "true"
+  default = "true"
 }
 
 ##############################################################
-# Define the vsphere provider
+# Define the vsphere provider 
 ##############################################################
 provider "vsphere" {
   allow_unverified_ssl = "${var.allow_unverified_ssl}"
@@ -42,7 +42,7 @@ resource "random_id" "stack_id" {
 }
 
 ##############################################################
-# Define pattern variables
+# Define pattern variables 
 ##############################################################
 ##### unique stack name #####
 variable "ibm_stack_name" {
@@ -54,254 +54,256 @@ variable "ibm_stack_name" {
 ##### Environment variables #####
 #Variable : ibm_pm_access_token
 variable "ibm_pm_access_token" {
-  type        = "string"
+  type = "string"
   description = "IBM Pattern Manager Access Token"
 }
 
 #Variable : ibm_pm_service
 variable "ibm_pm_service" {
-  type        = "string"
+  type = "string"
   description = "IBM Pattern Manager Service"
 }
 
 #Variable : ibm_sw_repo
 variable "ibm_sw_repo" {
-  type        = "string"
+  type = "string"
   description = "IBM Software Repo Root (https://<hostname>:<port>)"
 }
 
 #Variable : ibm_sw_repo_password
 variable "ibm_sw_repo_password" {
-  type        = "string"
+  type = "string"
   description = "IBM Software Repo Password"
 }
 
 #Variable : ibm_sw_repo_user
 variable "ibm_sw_repo_user" {
-  type        = "string"
+  type = "string"
   description = "IBM Software Repo Username"
-  default     = "repouser"
+  default = "repouser"
 }
 
 #Variable : wmq_qmgr_qmgr1_dlq
 variable "wmq_qmgr_qmgr1_dlq" {
-  type        = "string"
+  type = "string"
   description = "Queue Manager dead letter queue"
-  default     = "SYSTEM.DEAD.LETTER.QUEUE"
+  default = "SYSTEM.DEAD.LETTER.QUEUE"
 }
 
 #Variable : wmq_qmgr_qmgr1_loggingtype
 variable "wmq_qmgr_qmgr1_loggingtype" {
-  type        = "string"
+  type = "string"
   description = "Type of logging to use ll(Linear), lc(Circular)"
-  default     = "lc"
+  default = "lc"
 }
 
 #Variable : wmq_qmgr_qmgr1_primarylogs
 variable "wmq_qmgr_qmgr1_primarylogs" {
-  type        = "string"
+  type = "string"
   description = "Number of primary logs to create."
-  default     = "10"
+  default = "10"
 }
 
 #Variable : wmq_qmgr_qmgr1_secondarylogs
 variable "wmq_qmgr_qmgr1_secondarylogs" {
-  type        = "string"
+  type = "string"
   description = "Number of Secondary Logs"
-  default     = "20"
+  default = "20"
 }
+
 
 ##### MQV9Node01 variables #####
 #Variable : MQV9Node01-image
 variable "MQV9Node01-image" {
-  type        = "string"
+  type = "string"
   description = "Operating system image id / template that should be used when creating the virtual image"
 }
 
 #Variable : MQV9Node01-name
 variable "MQV9Node01-name" {
-  type        = "string"
+  type = "string"
   description = "Short hostname of virtual machine"
 }
 
 #Variable : MQV9Node01-os_admin_user
 variable "MQV9Node01-os_admin_user" {
-  type        = "string"
+  type = "string"
   description = "Name of the admin user account in the virtual machine that will be accessed via SSH"
 }
 
 #Variable : MQV9Node01_wmq_advanced
 variable "MQV9Node01_wmq_advanced" {
-  type        = "string"
+  type = "string"
   description = "Install IBM MQ Advanced components: File Transfer, IBM MQ Telemetry, and Advanced Message Security."
-  default     = "false"
+  default = "false"
 }
 
 #Variable : MQV9Node01_wmq_fixpack
 variable "MQV9Node01_wmq_fixpack" {
-  type        = "string"
+  type = "string"
   description = "The fixpack of IBM MQ to install."
-  default     = "1"
+  default = "1"
 }
 
 #Variable : MQV9Node01_wmq_net_core_rmem_default
 variable "MQV9Node01_wmq_net_core_rmem_default" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_core_rmem_default"
-  default     = "10240"
+  default = "10240"
 }
 
 #Variable : MQV9Node01_wmq_net_core_rmem_max
 variable "MQV9Node01_wmq_net_core_rmem_max" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_core_rmem_max"
-  default     = "4194304"
+  default = "4194304"
 }
 
 #Variable : MQV9Node01_wmq_net_core_wmem_default
 variable "MQV9Node01_wmq_net_core_wmem_default" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_core_wmem_default"
-  default     = "262144"
+  default = "262144"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_fin_timeout
 variable "MQV9Node01_wmq_net_ipv4_tcp_fin_timeout" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_fin_timeout"
-  default     = "60"
+  default = "60"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_keepalive_intvl
 variable "MQV9Node01_wmq_net_ipv4_tcp_keepalive_intvl" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_keepalive_intvl"
-  default     = "75"
+  default = "75"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_keepalive_time
 variable "MQV9Node01_wmq_net_ipv4_tcp_keepalive_time" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_keepalive_time"
-  default     = "7200"
+  default = "7200"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_rmem
 variable "MQV9Node01_wmq_net_ipv4_tcp_rmem" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_rmem"
-  default     = "4096    87380   4194304"
+  default = "4096    87380   4194304"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_sack
 variable "MQV9Node01_wmq_net_ipv4_tcp_sack" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_sack"
-  default     = "1"
+  default = "1"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_timestamps
 variable "MQV9Node01_wmq_net_ipv4_tcp_timestamps" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_timestamps"
-  default     = "1"
+  default = "1"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_window_scaling
 variable "MQV9Node01_wmq_net_ipv4_tcp_window_scaling" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_window_scaling"
-  default     = "1"
+  default = "1"
 }
 
 #Variable : MQV9Node01_wmq_net_ipv4_tcp_wmem
 variable "MQV9Node01_wmq_net_ipv4_tcp_wmem" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ Server Kernel Configuration net_ipv4_tcp_wmem"
-  default     = "4096    87380   4194304"
+  default = "4096    87380   4194304"
 }
 
 #Variable : MQV9Node01_wmq_perms
 variable "MQV9Node01_wmq_perms" {
-  type        = "string"
+  type = "string"
   description = "Default permissions for IBM MQ files on Unix"
-  default     = "755"
+  default = "755"
 }
 
 #Variable : MQV9Node01_wmq_qmgr_qmgr1_description
 variable "MQV9Node01_wmq_qmgr_qmgr1_description" {
-  type        = "string"
+  type = "string"
   description = "Description of the Queue Manager"
-  default     = "Default Queue Manager"
+  default = "Default Queue Manager"
 }
 
 #Variable : MQV9Node01_wmq_qmgr_qmgr1_listener_port
 variable "MQV9Node01_wmq_qmgr_qmgr1_listener_port" {
-  type        = "string"
+  type = "string"
   description = "Port the Queue Manager listens on."
-  default     = "1414"
+  default = "1414"
 }
 
 #Variable : MQV9Node01_wmq_qmgr_qmgr1_logsize
 variable "MQV9Node01_wmq_qmgr_qmgr1_logsize" {
-  type        = "string"
+  type = "string"
   description = "Size of the IBM MQ Logs"
-  default     = "16384"
+  default = "16384"
 }
 
 #Variable : MQV9Node01_wmq_qmgr_qmgr1_name
 variable "MQV9Node01_wmq_qmgr_qmgr1_name" {
-  type        = "string"
+  type = "string"
   description = "Name of the Queue Manager to Create"
-  default     = "QMGR1"
+  default = "QMGR1"
 }
 
 #Variable : MQV9Node01_wmq_service_name
 variable "MQV9Node01_wmq_service_name" {
-  type        = "string"
+  type = "string"
   description = "WebSphere MQ service name"
-  default     = "mq"
+  default = "mq"
 }
 
 #Variable : MQV9Node01_wmq_swap_file
 variable "MQV9Node01_wmq_swap_file" {
-  type        = "string"
+  type = "string"
   description = "Swap file name"
-  default     = "/swapfile"
+  default = "/swapfile"
 }
 
 #Variable : MQV9Node01_wmq_swap_file_size
 variable "MQV9Node01_wmq_swap_file_size" {
-  type        = "string"
+  type = "string"
   description = "UNIX Swap size in megabytes"
-  default     = "512"
+  default = "512"
 }
 
 #Variable : MQV9Node01_wmq_version
 variable "MQV9Node01_wmq_version" {
-  type        = "string"
+  type = "string"
   description = "The Version of IBM MQ to install, eg, 8.0"
-  default     = "9.0"
+  default = "9.0"
 }
 
 #Variable : wmq_mqsc_script_url
 variable "wmq_mqsc_script_url" {
-  type        = "string"
+  type = "string"
   description = "Generated"
-  default     = "none"
+  default = "none"
 }
+
 
 #########################################################
 ##### Resource : MQV9Node01
 #########################################################
 
 variable "MQV9Node01_domain" {
-  type        = "string"
+  type = "string"
   description = "Domain Name of virtual machine"
 }
 
 variable "MQV9Node01-os_password" {
-  type        = "string"
+  type = "string"
   description = "Operating System Password for the Operating System User to access virtual machine"
 }
 
@@ -315,12 +317,12 @@ variable "MQV9Node01_datacenter" {
 
 variable "MQV9Node01_number_of_vcpu" {
   description = "Number of virtual CPU for the virtual machine, which is required to be a positive Integer"
-  default     = "2"
+  default = "2"
 }
 
 variable "MQV9Node01_memory" {
   description = "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024"
-  default     = "2048"
+  default = "2048"
 }
 
 variable "MQV9Node01_cluster" {
@@ -328,12 +330,12 @@ variable "MQV9Node01_cluster" {
 }
 
 variable "MQV9Node01_dns_suffixes" {
-  type        = "list"
+  type = "list"
   description = "Name resolution suffixes for the virtual network adapter"
 }
 
 variable "MQV9Node01_dns_servers" {
-  type        = "list"
+  type = "list"
   description = "DNS servers for the virtual network adapter"
 }
 
@@ -358,61 +360,60 @@ variable "MQV9Node01_root_disk_datastore" {
 }
 
 variable "MQV9Node01_root_disk_type" {
-  type        = "string"
+  type = "string"
   description = "Type of template disk volume"
-  default     = "eager_zeroed"
+  default = "eager_zeroed"
 }
 
 variable "MQV9Node01_root_disk_controller_type" {
-  type        = "string"
+  type = "string"
   description = "Type of template disk controller"
-  default     = "scsi"
+  default = "scsi"
 }
 
 variable "MQV9Node01_root_disk_keep_on_remove" {
-  type        = "string"
+  type = "string"
   description = "Delete template disk volume when the virtual machine is deleted"
-  default     = "false"
+  default = "false"
 }
 
 # vsphere vm
 resource "vsphere_virtual_machine" "MQV9Node01" {
-  name         = "${var.MQV9Node01-name}"
-  folder       = "${var.MQV9Node01_folder}"
-  datacenter   = "${var.MQV9Node01_datacenter}"
-  vcpu         = "${var.MQV9Node01_number_of_vcpu}"
-  memory       = "${var.MQV9Node01_memory}"
-  cluster      = "${var.MQV9Node01_cluster}"
+  name = "${var.MQV9Node01-name}"
+  folder = "${var.MQV9Node01_folder}"
+  datacenter = "${var.MQV9Node01_datacenter}"
+  vcpu = "${var.MQV9Node01_number_of_vcpu}"
+  memory = "${var.MQV9Node01_memory}"
+  cluster = "${var.MQV9Node01_cluster}"
   dns_suffixes = "${var.MQV9Node01_dns_suffixes}"
-  dns_servers  = "${var.MQV9Node01_dns_servers}"
-  domain       = "${var.MQV9Node01_domain}"
+  dns_servers = "${var.MQV9Node01_dns_servers}"
+  domain = "${var.MQV9Node01_domain}"
 
   network_interface {
-    label              = "${var.MQV9Node01_network_interface_label}"
-    ipv4_gateway       = "${var.MQV9Node01_ipv4_gateway}"
-    ipv4_address       = "${var.MQV9Node01_ipv4_address}"
+    label = "${var.MQV9Node01_network_interface_label}"
+    ipv4_gateway = "${var.MQV9Node01_ipv4_gateway}"
+    ipv4_address = "${var.MQV9Node01_ipv4_address}"
     ipv4_prefix_length = "${var.MQV9Node01_ipv4_prefix_length}"
   }
 
   disk {
-    type            = "${var.MQV9Node01_root_disk_type}"
-    template        = "${var.MQV9Node01-image}"
-    datastore       = "${var.MQV9Node01_root_disk_datastore}"
-    keep_on_remove  = "${var.MQV9Node01_root_disk_keep_on_remove}"
+    type = "${var.MQV9Node01_root_disk_type}"
+    template = "${var.MQV9Node01-image}"
+    datastore = "${var.MQV9Node01_root_disk_datastore}"
+    keep_on_remove = "${var.MQV9Node01_root_disk_keep_on_remove}"
     controller_type = "${var.MQV9Node01_root_disk_controller_type}"
   }
 
   # Specify the connection
   connection {
-    type     = "ssh"
-    user     = "${var.MQV9Node01-os_admin_user}"
+    type = "ssh"
+    user = "${var.MQV9Node01-os_admin_user}"
     password = "${var.MQV9Node01-os_password}"
   }
 
   provisioner "file" {
     destination = "MQV9Node01_add_ssh_key.sh"
-
-    content = <<EOF
+    content     = <<EOF
 ##############################################################
 # Licensed Materials - Property of IBM
 #
@@ -476,9 +477,10 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo bash -c 'chmod +x MQV9Node01_add_ssh_key.sh'",
-      "sudo bash -c './MQV9Node01_add_ssh_key.sh  \"${var.MQV9Node01-os_admin_user}\" \"${var.user_public_ssh_key}\" \"${var.ibm_pm_public_ssh_key}\">> MQV9Node01_add_ssh_key.log 2>&1'",
+      "sudo bash -c './MQV9Node01_add_ssh_key.sh  \"${var.MQV9Node01-os_admin_user}\" \"${var.user_public_ssh_key}\" \"${var.ibm_pm_public_ssh_key}\">> MQV9Node01_add_ssh_key.log 2>&1'"
     ]
   }
+
 }
 
 #########################################################
@@ -492,13 +494,12 @@ resource "null_resource" "MQV9Node01_byos-runmqsc" {
   connection {
     user        = "${var.MQV9Node01-os_admin_user}"
     private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
-    host        = "${vsphere_virtual_machine.MQV9Node01.network_interface.0.ipv4_address}"
+    host = "${vsphere_virtual_machine.MQV9Node01.network_interface.0.ipv4_address}"
   }
 
   provisioner "file" {
     destination = "MQV9Node01_byos-runmqsc.properties"
-
-    content = <<EOF
+    content     = <<EOF
 export wmq_mqsc_script_url="${var.wmq_mqsc_script_url}"
 
 EOF
@@ -506,8 +507,7 @@ EOF
 
   provisioner "file" {
     destination = "MQV9Node01_byos-runmqsc.sh"
-
-    content = <<EOF
+    content     = <<EOF
 #!/usr/bin/env sh
 
 if [ "${var.wmq_mqsc_script_url}" != "none" ]; then
@@ -531,23 +531,24 @@ EOF
       "sudo bash -c '. ./MQV9Node01_byos-runmqsc.properties'",
       "sudo bash -c 'chmod +x MQV9Node01_byos-runmqsc.sh'",
       "sudo bash -c './MQV9Node01_byos-runmqsc.sh  >> MQV9Node01_byos-runmqsc.log 2>&1'",
-      "sudo bash -c 'rm MQV9Node01_byos-runmqsc.properties'",
+      "sudo bash -c 'rm MQV9Node01_byos-runmqsc.properties'"
     ]
   }
+
 }
+
 
 #########################################################
 ##### Resource : MQV9Node01_chef_bootstrap_comp
 #########################################################
 
 resource "camc_bootstrap" "MQV9Node01_chef_bootstrap_comp" {
-  depends_on      = ["camc_vaultitem.VaultItem", "vsphere_virtual_machine.MQV9Node01"]
-  name            = "MQV9Node01_chef_bootstrap_comp"
-  camc_endpoint   = "${var.ibm_pm_service}/v1/bootstrap/chef"
-  access_token    = "${var.ibm_pm_access_token}"
+  depends_on = ["camc_vaultitem.VaultItem","vsphere_virtual_machine.MQV9Node01"]
+  name = "MQV9Node01_chef_bootstrap_comp"
+  camc_endpoint = "${var.ibm_pm_service}/v1/bootstrap/chef"
+  access_token = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace           = true
-
+  trace = true
   data = <<EOT
 {
   "os_admin_user": "${var.MQV9Node01-os_admin_user}",
@@ -569,18 +570,18 @@ resource "camc_bootstrap" "MQV9Node01_chef_bootstrap_comp" {
 EOT
 }
 
+
 #########################################################
 ##### Resource : MQV9Node01_wmq_create_qmgrs
 #########################################################
 
 resource "camc_softwaredeploy" "MQV9Node01_wmq_create_qmgrs" {
-  depends_on      = ["camc_softwaredeploy.MQV9Node01_wmq_v9_install"]
-  name            = "MQV9Node01_wmq_create_qmgrs"
-  camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
-  access_token    = "${var.ibm_pm_access_token}"
+  depends_on = ["camc_softwaredeploy.MQV9Node01_wmq_v9_install"]
+  name = "MQV9Node01_wmq_create_qmgrs"
+  camc_endpoint = "${var.ibm_pm_service}/v1/software_deployment/chef"
+  access_token = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace           = true
-
+  trace = true
   data = <<EOT
 {
   "os_admin_user": "${var.MQV9Node01-os_admin_user}",
@@ -625,18 +626,18 @@ resource "camc_softwaredeploy" "MQV9Node01_wmq_create_qmgrs" {
 EOT
 }
 
+
 #########################################################
 ##### Resource : MQV9Node01_wmq_v9_install
 #########################################################
 
 resource "camc_softwaredeploy" "MQV9Node01_wmq_v9_install" {
-  depends_on      = ["camc_bootstrap.MQV9Node01_chef_bootstrap_comp"]
-  name            = "MQV9Node01_wmq_v9_install"
-  camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
-  access_token    = "${var.ibm_pm_access_token}"
+  depends_on = ["camc_bootstrap.MQV9Node01_chef_bootstrap_comp"]
+  name = "MQV9Node01_wmq_v9_install"
+  camc_endpoint = "${var.ibm_pm_service}/v1/software_deployment/chef"
+  access_token = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace           = true
-
+  trace = true
   data = <<EOT
 {
   "os_admin_user": "${var.MQV9Node01-os_admin_user}",
@@ -689,16 +690,16 @@ resource "camc_softwaredeploy" "MQV9Node01_wmq_v9_install" {
 EOT
 }
 
+
 #########################################################
 ##### Resource : VaultItem
 #########################################################
 
 resource "camc_vaultitem" "VaultItem" {
-  camc_endpoint   = "${var.ibm_pm_service}/v1/vault_item/chef"
-  access_token    = "${var.ibm_pm_access_token}"
+  camc_endpoint = "${var.ibm_pm_service}/v1/vault_item/chef"
+  access_token = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace           = true
-
+  trace = true
   data = <<EOT
 {
   "vault_content": {
@@ -725,3 +726,4 @@ output "MQV9Node01_roles" {
 output "stack_id" {
   value = "${random_id.stack_id.hex}"
 }
+

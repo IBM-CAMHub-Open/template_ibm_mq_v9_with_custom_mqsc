@@ -444,6 +444,18 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_mqsc_script_url",
+      "type": "string",
+      "description": "Generated",
+      "default": "none",
+      "hidden": false,
+      "label": "IBM MQ runmqsc script URL - MQV9Node01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "mqv9node01"
+    },
+    {
       "name": "ibm_pm_access_token",
       "type": "string",
       "description": "IBM Pattern Manager Access Token",
@@ -726,18 +738,6 @@
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
-    },
-    {
-      "name": "wmq_mqsc_script_url",
-      "type": "string",
-      "description": "Generated",
-      "default": "none",
-      "hidden": false,
-      "label": "Wmq Mqsc Script Url - MQV9Node01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "mqv9node01"
     },
     {
       "name": "MQV9Node01_cluster",
