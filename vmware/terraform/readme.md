@@ -18,8 +18,9 @@ Install and configure IBM MQ on a single Linux Node, configuring a Queue Manager
 ### Operating Systems Supported
 
 Red Hat Enterprise Linux 7<br>
-Red Hat Enterprise Linux 6<br>
+Red Hat Enterprise Linux 6 (MQ8 only)<br>
 Ubuntu 16.04<br>
+Ubuntu 14.04<br>
 <br>
 ### Topology
 
@@ -76,9 +77,10 @@ VMware vSphere
 
 The following Operating Systems are supported for software defined in this template.
 
-- RHEL 6.x
+- RHEL 6.x (Not for MQ9)
 - RHEL 7.x
 - Ubuntu 14.0.4
+- Ubuntu 16
 
 
 ### Nodes Description
@@ -177,12 +179,12 @@ The following standard operating system libraries are required in the relevant O
   <tr>
     <td>redhat WMQ8.0</td>
     <td>x86_64</td>
-    <td>ksh, binutils, gcc, glibc, libgcc, openssl, gtk2, libstdc++.x86_64, libstdc++.i686</td>
+    <td>ksh, binutils, gcc, glibc, libgcc, openssl, gtk2, libstdc++.x86_64, libstdc++.i686, redhat-lsb-core</td>
   </tr>
   <tr>
     <td>debian WMQ8.0</td>
     <td>x86_64</td>
-    <td>ksh, binutils, gcc, gcc-multilib, openssl, libgtk2.0-0, rpm</td>
+    <td>ksh, binutils, gcc, gcc-multilib, openssl, libgtk2.0-0, rpm, lsb-core</td>
   </tr>
   <tr>
     <td>debian WMQ9.0</td>

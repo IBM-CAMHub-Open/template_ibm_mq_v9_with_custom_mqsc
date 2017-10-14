@@ -347,7 +347,7 @@
       ],
       "required": true,
       "immutable": false,
-      "group_name": "environment"
+      "group_name": "mqv9node01"
     },
     {
       "name": "MQV9Node01_wmq_qmgr_qmgr1_name",
@@ -371,7 +371,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "environment"
+      "group_name": "mqv9node01"
     },
     {
       "name": "wmq_qmgr_qmgr1_secondarylogs",
@@ -383,7 +383,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "environment"
+      "group_name": "mqv9node01"
     },
     {
       "name": "wmq_qmgr_qmgr1_dlq",
@@ -395,7 +395,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "environment"
+      "group_name": "mqv9node01"
     },
     {
       "name": "MQV9Node01_wmq_service_name",

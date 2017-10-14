@@ -34,7 +34,7 @@
     "description": "1.0<br>"},
 {
     "title": "Operating Systems Supported",
-    "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04<br>"},
+    "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6 (MQ8 only)<br>Ubuntu 16.04<br>Ubuntu 14.04<br>"},
 {
     "title": "Topology",
     "description": "1 virtual machine:<br> IBM MQ Instance instance<br>"},
