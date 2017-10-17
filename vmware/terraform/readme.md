@@ -18,8 +18,8 @@ Install and configure IBM MQ V9 on a single Linux virtual machine. Configuration
 ### Operating Systems Supported
 
 Red Hat Enterprise Linux 7<br>
-Ubuntu 16.04<br>
-Ubuntu 14.04<br>
+Ubuntu 16.04 LTS<br>
+Ubuntu 14.04 LTS<br>
 <br>
 ### Topology
 
@@ -32,7 +32,7 @@ IBM MQ V9.0<br>
 <br>
 ### Default Virtual Machine Settings
 
- vCPU 1, Memory (GB) 2<br>
+ vCPU 2, Memory (GB) 4<br>
 <br>
 ### Usage and Special Notes
 
