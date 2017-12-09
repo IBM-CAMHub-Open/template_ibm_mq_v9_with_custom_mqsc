@@ -12,10 +12,6 @@
       "label": "Cloud Input Variables"
     },
     {
-      "name": "virtualmachine",
-      "label": "Virtual Machine Input Variables"
-    },
-    {
       "name": "ssh_keys",
       "label": "SSH Keys"
     },
@@ -26,6 +22,10 @@
     {
       "name": "mqv9node01",
       "label": "MQV9Node01"
+    },
+    {
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Variables"
     }
   ],
   "output_groups": [
@@ -47,12 +47,95 @@
       "group_name": "environment"
     },
     {
+      "name": "aws_ami_owner_id",
+      "type": "string",
+      "description": "AWS AMI Owner ID",
+      "default": "309956199498",
+      "hidden": false,
+      "label": "AWS AMI Owner ID",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "aws_region",
+      "type": "string",
+      "description": "AWS Region Name",
+      "default": "us-east-1",
+      "hidden": false,
+      "label": "AWS Region Name",
+      "secured": false,
+      "options": [
+        {
+          "value": "us-east-1",
+          "label": "US East (N. Virginia)",
+          "default": true
+        },
+        {
+          "value": "us-east-2",
+          "label": "US East (Ohio)"
+        },
+        {
+          "value": "us-west-1",
+          "label": "US West (N. California)"
+        },
+        {
+          "value": "us-west-2",
+          "label": "US West (Oregon)"
+        },
+        {
+          "value": "ca-central-1",
+          "label": "Canada (Central)"
+        },
+        {
+          "value": "eu-west-1",
+          "label": "EU (Ireland)"
+        },
+        {
+          "value": "eu-central-1",
+          "label": "EU (Frankfurt)"
+        },
+        {
+          "value": "eu-west-2",
+          "label": "EU (London)"
+        },
+        {
+          "value": "ap-northeast-1",
+          "label": "Asia Pacific (Tokyo)"
+        },
+        {
+          "value": "ap-northeast-2",
+          "label": "Asia Pacific (Seoul)"
+        },
+        {
+          "value": "ap-southeast-1",
+          "label": "Asia Pacific (Singapore)"
+        },
+        {
+          "value": "ap-southeast-2",
+          "label": "Asia Pacific (Sydney)"
+        },
+        {
+          "value": "ap-south-1",
+          "label": "Asia Pacific (Mumbai)"
+        },
+        {
+          "value": "sa-east-1",
+          "label": "South America (São Paulo)"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
       "name": "MQV9Node01_root_block_device_delete_on_termination",
       "type": "string",
       "description": "AWS Root Block Device Delete on Termination",
       "default": "true",
       "hidden": false,
-      "label": "AWS Root Block Device Delete on Termination - MQV9Node01",
+      "label": "AWS Root Block Device Delete on Termination",
       "secured": false,
       "options": [
         {
@@ -67,21 +150,19 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_root_block_device_volume_size",
       "type": "string",
       "description": "AWS Root Block Device Volume Size",
-      "default": 25,
+      "default": 100,
       "hidden": false,
-      "label": "AWS Root Block Device Volume Size - MQV9Node01",
+      "label": "AWS Root Block Device Volume Size",
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_root_block_device_volume_type",
@@ -89,7 +170,7 @@
       "description": "AWS Root Block Device Volume Type",
       "default": "gp2",
       "hidden": false,
-      "label": "AWS Root Block Device Volume Type - MQV9Node01",
+      "label": "AWS Root Block Device Volume Type",
       "secured": false,
       "options": [
         {
@@ -112,28 +193,48 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
+    },
+    {
+      "name": "aws_sg_camc_name",
+      "type": "string",
+      "description": "AWS Security Group Name",
+      "hidden": false,
+      "label": "AWS Security Group Name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_subnet_name",
       "type": "string",
       "description": "AWS Subnet Name",
       "hidden": false,
-      "label": "AWS Subnet Name - MQV9Node01",
+      "label": "AWS Subnet Name",
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
+    },
+    {
+      "name": "aws_vpc_name",
+      "type": "string",
+      "description": "AWS VPC Name",
+      "hidden": false,
+      "label": "AWS VPC Name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_associate_public_ip_address",
       "type": "string",
-      "description": "Assign a public IP",
+      "description": "AWS assign a public IP to instance",
       "default": "true",
       "hidden": false,
-      "label": "Assign a public IP - MQV9Node01",
+      "label": "AWS assign a public IP to instance",
       "secured": false,
       "options": [
         {
@@ -148,8 +249,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_wmq_advanced",
@@ -573,14 +673,14 @@
       "name": "MQV9Node01-flavor",
       "type": "string",
       "description": "MQV9Node01 Flavor",
-      "default": "t2.small",
+      "default": "t2.medium",
       "hidden": false,
       "label": "MQV9Node01 Flavor",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "virtualmachine"
     },
     {
       "name": "MQV9Node01-image",
@@ -635,7 +735,7 @@
       "description": "Expose and use public IP of virtual machine for internal communication",
       "default": "true",
       "hidden": false,
-      "label": "Use Public Management Network - MQV9Node01",
+      "label": "Use Public Management Network",
       "secured": false,
       "options": [
         {
@@ -649,7 +749,18 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "wmq_mqsc_script_url",
+      "type": "string",
+      "description": "MQ Script Url Path",
+      "default": "none",
+      "hidden": false,
+      "label": "Wmq Mqsc Script Url - MQV9Node01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
       "group_name": "mqv9node01"
     },
     {
@@ -677,111 +788,6 @@
       "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key_name}"
     },
     {
-      "name": "aws_ami_owner_id",
-      "type": "string",
-      "description": "The AMI Owner ID",
-      "default": "309956199498",
-      "hidden": false,
-      "label": "The AMI Owner ID",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "aws_region",
-      "type": "string",
-      "description": "The aws region",
-      "default": "us-east-1",
-      "hidden": false,
-      "label": "The aws region",
-      "secured": false,
-      "options": [
-        {
-          "value": "us-east-1",
-          "label": "US East (N. Virginia)",
-          "default": true
-        },
-        {
-          "value": "us-east-2",
-          "label": "US East (Ohio)"
-        },
-        {
-          "value": "us-west-1",
-          "label": "US West (N. California)"
-        },
-        {
-          "value": "us-west-2",
-          "label": "US West (Oregon)"
-        },
-        {
-          "value": "ca-central-1",
-          "label": "Canada (Central)"
-        },
-        {
-          "value": "eu-west-1",
-          "label": "EU (Ireland)"
-        },
-        {
-          "value": "eu-central-1",
-          "label": "EU (Frankfurt)"
-        },
-        {
-          "value": "eu-west-2",
-          "label": "EU (London)"
-        },
-        {
-          "value": "ap-northeast-1",
-          "label": "Asia Pacific (Tokyo)"
-        },
-        {
-          "value": "ap-northeast-2",
-          "label": "Asia Pacific (Seoul)"
-        },
-        {
-          "value": "ap-southeast-1",
-          "label": "Asia Pacific (Singapore)"
-        },
-        {
-          "value": "ap-southeast-2",
-          "label": "Asia Pacific (Sydney)"
-        },
-        {
-          "value": "ap-south-1",
-          "label": "Asia Pacific (Mumbai)"
-        },
-        {
-          "value": "sa-east-1",
-          "label": "South America (São Paulo)"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "aws_sg_camc_name",
-      "type": "string",
-      "description": "The name of the aws security group for automation content",
-      "hidden": false,
-      "label": "The name of the aws security group for automation content",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "aws_vpc_name",
-      "type": "string",
-      "description": "The name of the aws vpc",
-      "hidden": false,
-      "label": "The name of the aws vpc",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
       "name": "user_public_ssh_key",
       "type": "string",
       "description": "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH.",
@@ -791,20 +797,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "ssh_keys"
-    },
-    {
-      "name": "wmq_mqsc_script_url",
-      "type": "string",
-      "description": "Generated",
-      "default": "none",
-      "hidden": false,
-      "label": "Wmq Mqsc Script Url - ungrouped",
-      "secured": false,
-      "required": true,
-      "immutable": false,
       "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "ssh_keys"
     },
     {
       "name": "runtime_domain",

@@ -12,10 +12,6 @@
       "label": "Cloud Input Variables"
     },
     {
-      "name": "virtualmachine",
-      "label": "Virtual Machine Input Variables"
-    },
-    {
       "name": "ssh_keys",
       "label": "SSH Keys"
     },
@@ -26,6 +22,14 @@
     {
       "name": "mqv9node01",
       "label": "MQV9Node01"
+    },
+    {
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Variables"
+    },
+    {
+      "name": "ungrouped",
+      "label": "ungrouped"
     }
   ],
   "output_groups": [
@@ -45,6 +49,29 @@
       "required": true,
       "immutable": false,
       "group_name": "environment"
+    },
+    {
+      "name": "MQV9Node01_local_disk",
+      "type": "string",
+      "description": "User local disk or SAN disk",
+      "default": "false",
+      "hidden": false,
+      "label": "IBMCloud - Local / SAN Disk - MQV9Node01",
+      "secured": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_wmq_advanced",
@@ -465,30 +492,6 @@
       "group_name": "environment"
     },
     {
-      "name": "MQV9Node01_local_disk",
-      "type": "string",
-      "description": "User local disk or SAN disk",
-      "default": "false",
-      "hidden": false,
-      "label": "IBMCloud - Local / SAN Disk - MQV9Node01",
-      "secured": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "True"
-        },
-        {
-          "value": "false",
-          "label": "False",
-          "default": "true"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
-    },
-    {
       "name": "MQV9Node01_datacenter",
       "type": "string",
       "description": "IBMCloud datacenter where infrastructure resources will be deployed",
@@ -625,8 +628,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_dedicated_acct_host_only",
@@ -649,8 +651,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_hourly_billing",
@@ -673,8 +674,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_network_speed",
@@ -697,8 +697,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_private_network_only",
@@ -721,8 +720,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_memory",
@@ -765,8 +763,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01_number_of_cores",
@@ -809,8 +806,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01-image",
@@ -846,18 +842,17 @@
       "options": [
         {
           "value": "25",
-          "label": "25 GB",
-          "default": true
+          "label": "25 GB"
         },
         {
           "value": "100",
-          "label": "100 GB"
+          "label": "100 GB",
+          "default": true
         }
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "cloud"
     },
     {
       "name": "MQV9Node01-name",
@@ -880,7 +875,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "mqv9node01"
     },
     {
@@ -889,7 +883,7 @@
       "description": "Expose and use public IP of virtual machine for internal communication",
       "default": "true",
       "hidden": false,
-      "label": "Use Public Management Network - MQV9Node01",
+      "label": "Use Public Management Network",
       "secured": false,
       "options": [
         {
@@ -901,6 +895,18 @@
           "label": true
         }
       ],
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "wmq_mqsc_script_url",
+      "type": "string",
+      "description": "MQ Script Url Path",
+      "default": "none",
+      "hidden": false,
+      "label": "Wmq Mqsc Script Url - MQV9Node01",
+      "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
@@ -940,20 +946,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "ssh_keys"
-    },
-    {
-      "name": "wmq_mqsc_script_url",
-      "type": "string",
-      "description": "Generated",
-      "default": "none",
-      "hidden": false,
-      "label": "Wmq Mqsc Script Url - ungrouped",
-      "secured": false,
-      "required": true,
-      "immutable": false,
       "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "ssh_keys"
     },
     {
       "name": "runtime_domain",

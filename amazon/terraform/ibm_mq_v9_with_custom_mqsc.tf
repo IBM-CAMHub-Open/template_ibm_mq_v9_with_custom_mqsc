@@ -26,12 +26,12 @@ variable "user_public_ssh_key" {
 }
 
 variable "aws_ami_owner_id" {
-  description = "The AMI Owner ID"
+  description = "AWS AMI Owner ID"
   default     = "309956199498"
 }
 
 variable "aws_region" {
-  description = "The aws region"
+  description = "AWS Region Name"
   default     = "us-east-1"
 }
 
@@ -47,6 +47,10 @@ provider "camc" {
   version = "~> 0.1"
 }
 
+provider "template" {
+  version = "~> 1.0"
+}
+
 provider "random" {
   version = "~> 1.0"
 }
@@ -60,7 +64,7 @@ data "aws_vpc" "selected_vpc" {
 
 #Parameter : aws_vpc_name
 variable "aws_vpc_name" {
-  description = "The name of the aws vpc"
+  description = "AWS VPC Name"
 }
 
 data "aws_security_group" "aws_sg_camc_name_selected" {
@@ -70,7 +74,7 @@ data "aws_security_group" "aws_sg_camc_name_selected" {
 
 #Parameter : aws_sg_camc_name
 variable "aws_sg_camc_name" {
-  description = "The name of the aws security group for automation content"
+  description = "AWS Security Group Name"
 }
 
 resource "random_id" "stack_id" {
@@ -83,17 +87,6 @@ resource "random_id" "stack_id" {
 ##### unique stack name #####
 variable "ibm_stack_name" {
   description = "A unique stack name."
-}
-
-#### Default OS Admin User Map ####
-variable "default_os_admin_user" {
-  type        = "map"
-  description = "look up os_admin_user using resource image"
-
-  default = {
-    ubuntu_images_ubuntu_xenial-16.04_099720109477 = "ubuntu"
-    RHEL-7.4_HVM_GA_309956199498                   = "ec2-user"
-  }
 }
 
 ##### Environment variables #####
@@ -129,13 +122,6 @@ variable "ibm_sw_repo_user" {
 }
 
 ##### MQV9Node01 variables #####
-#Variable : MQV9Node01-flavor
-variable "MQV9Node01-flavor" {
-  type        = "string"
-  description = "MQV9Node01 Flavor"
-  default     = "t2.small"
-}
-
 data "aws_ami" "MQV9Node01_ami" {
   most_recent = true
 
@@ -152,13 +138,6 @@ variable "MQV9Node01-image" {
   type        = "string"
   description = "Operating system image id / template that should be used when creating the virtual image"
   default     = "RHEL-7.4_HVM_GA"
-}
-
-#Variable : MQV9Node01-mgmt-network-public
-variable "MQV9Node01-mgmt-network-public" {
-  type        = "string"
-  description = "Expose and use public IP of virtual machine for internal communication"
-  default     = "true"
 }
 
 #Variable : MQV9Node01-name
@@ -355,12 +334,26 @@ variable "MQV9Node01_wmq_version" {
   default     = "9.0"
 }
 
-##### ungrouped variables #####
 #Variable : wmq_mqsc_script_url
 variable "wmq_mqsc_script_url" {
   type        = "string"
-  description = "Generated"
+  description = "MQ Script Url Path"
   default     = "none"
+}
+
+##### virtualmachine variables #####
+#Variable : MQV9Node01-flavor
+variable "MQV9Node01-flavor" {
+  type        = "string"
+  description = "MQV9Node01 Flavor"
+  default     = "t2.medium"
+}
+
+#Variable : MQV9Node01-mgmt-network-public
+variable "MQV9Node01-mgmt-network-public" {
+  type        = "string"
+  description = "Expose and use public IP of virtual machine for internal communication"
+  default     = "true"
 }
 
 ##### domain name #####
@@ -389,7 +382,7 @@ variable "MQV9Node01_subnet_name" {
 #Parameter : MQV9Node01_associate_public_ip_address
 variable "MQV9Node01_associate_public_ip_address" {
   type        = "string"
-  description = "Assign a public IP"
+  description = "AWS assign a public IP to instance"
   default     = "true"
 }
 
@@ -404,7 +397,7 @@ variable "MQV9Node01_root_block_device_volume_type" {
 variable "MQV9Node01_root_block_device_volume_size" {
   type        = "string"
   description = "AWS Root Block Device Volume Size"
-  default     = "25"
+  default     = "100"
 }
 
 #Parameter : MQV9Node01_root_block_device_delete_on_termination
@@ -428,7 +421,7 @@ resource "aws_instance" "MQV9Node01" {
 
   # Specify the ssh connection
   connection {
-    user        = "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.MQV9Node01-image, "/", "_"), var.aws_ami_owner_id)) : var.MQV9Node01-os_admin_user}"
+    user        = "${var.MQV9Node01-os_admin_user}"
     private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
   }
 
@@ -502,7 +495,7 @@ data "template_cloudinit_config" "MQV9Node01_init" {
     content_type = "text/cloud-config"
 
     content = <<EOF
-hostname: ${var.MQV9Node01-name}
+hostname: ${var.MQV9Node01-name}.${var.runtime_domain}
 fqdn: ${var.MQV9Node01-name}.${var.runtime_domain}
 manage_etc_hosts: false
 EOF
@@ -518,7 +511,7 @@ resource "null_resource" "MQV9Node01_byos-runmqsc" {
 
   # Specify the ssh connection
   connection {
-    user        = "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.MQV9Node01-image, "/", "_"), var.aws_ami_owner_id)) : var.MQV9Node01-os_admin_user}"
+    user        = "${var.MQV9Node01-os_admin_user}"
     private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
     host        = "${var.MQV9Node01-mgmt-network-public == "false" ? aws_instance.MQV9Node01.private_ip : aws_instance.MQV9Node01.public_ip}"
   }
@@ -556,11 +549,11 @@ EOF
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-      "bash -c 'chmod +x MQV9Node01_byos-runmqsc.properties'",
-      "bash -c '. ./MQV9Node01_byos-runmqsc.properties'",
-      "bash -c 'chmod +x MQV9Node01_byos-runmqsc.sh'",
-      "bash -c './MQV9Node01_byos-runmqsc.sh  >> MQV9Node01_byos-runmqsc.log 2>&1'",
-      "bash -c 'rm MQV9Node01_byos-runmqsc.properties'",
+      "sudo bash -c 'chmod +x MQV9Node01_byos-runmqsc.properties'",
+      "sudo bash -c '. ./MQV9Node01_byos-runmqsc.properties'",
+      "sudo bash -c 'chmod +x MQV9Node01_byos-runmqsc.sh'",
+      "sudo bash -c './MQV9Node01_byos-runmqsc.sh  >> MQV9Node01_byos-runmqsc.log 2>&1'",
+      "sudo bash -c 'rm MQV9Node01_byos-runmqsc.properties'",
     ]
   }
 }
@@ -579,7 +572,7 @@ resource "camc_bootstrap" "MQV9Node01_chef_bootstrap_comp" {
 
   data = <<EOT
 {
-  "os_admin_user": "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.MQV9Node01-image, "/", "_"), var.aws_ami_owner_id)) : var.MQV9Node01-os_admin_user}",
+  "os_admin_user": "${var.MQV9Node01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.MQV9Node01-mgmt-network-public == "false" ? aws_instance.MQV9Node01.private_ip : aws_instance.MQV9Node01.public_ip}",
@@ -612,7 +605,7 @@ resource "camc_softwaredeploy" "MQV9Node01_wmq_create_qmgrs" {
 
   data = <<EOT
 {
-  "os_admin_user": "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.MQV9Node01-image, "/", "_"), var.aws_ami_owner_id)) : var.MQV9Node01-os_admin_user}",
+  "os_admin_user": "${var.MQV9Node01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.MQV9Node01-mgmt-network-public == "false" ? aws_instance.MQV9Node01.private_ip : aws_instance.MQV9Node01.public_ip}",
@@ -668,7 +661,7 @@ resource "camc_softwaredeploy" "MQV9Node01_wmq_v9_install" {
 
   data = <<EOT
 {
-  "os_admin_user": "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.MQV9Node01-image, "/", "_"), var.aws_ami_owner_id)) : var.MQV9Node01-os_admin_user}",
+  "os_admin_user": "${var.MQV9Node01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.MQV9Node01-mgmt-network-public == "false" ? aws_instance.MQV9Node01.private_ip : aws_instance.MQV9Node01.public_ip}",

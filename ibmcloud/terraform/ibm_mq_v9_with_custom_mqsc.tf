@@ -61,17 +61,6 @@ variable "ibm_stack_name" {
   description = "A unique stack name."
 }
 
-#### Default OS Admin User Map ####
-variable "default_os_admin_user" {
-  type        = "map"
-  description = "look up os_admin_user using resource image"
-
-  default = {
-    UBUNTU_16_64 = "root"
-    REDHAT_7_64  = "root"
-  }
-}
-
 ##### Environment variables #####
 #Variable : ibm_pm_access_token
 variable "ibm_pm_access_token" {
@@ -110,13 +99,6 @@ variable "MQV9Node01-image" {
   type        = "string"
   description = "Operating system image id / template that should be used when creating the virtual image"
   default     = "REDHAT_7_64"
-}
-
-#Variable : MQV9Node01-mgmt-network-public
-variable "MQV9Node01-mgmt-network-public" {
-  type        = "string"
-  description = "Expose and use public IP of virtual machine for internal communication"
-  default     = "true"
 }
 
 #Variable : MQV9Node01-name
@@ -313,14 +295,22 @@ variable "MQV9Node01_wmq_version" {
   default     = "9.0"
 }
 
-##### ungrouped variables #####
 #Variable : wmq_mqsc_script_url
 variable "wmq_mqsc_script_url" {
   type        = "string"
-  description = "Generated"
+  description = "MQ Script Url Path"
   default     = "none"
 }
 
+##### virtualmachine variables #####
+#Variable : MQV9Node01-mgmt-network-public
+variable "MQV9Node01-mgmt-network-public" {
+  type        = "string"
+  description = "Expose and use public IP of virtual machine for internal communication"
+  default     = "true"
+}
+
+##### ungrouped variables #####
 ##### domain name #####
 variable "runtime_domain" {
   description = "domain name"
@@ -356,7 +346,7 @@ variable "MQV9Node01_number_of_cores" {
 variable "MQV9Node01_memory" {
   type        = "string"
   description = "Amount of Memory (MBs), which is required to be one or more times of 1024"
-  default     = "2048"
+  default     = "4096"
 }
 
 #Parameter : MQV9Node01_network_speed
@@ -410,7 +400,7 @@ resource "ibm_compute_vm_instance" "MQV9Node01" {
 
   # Specify the ssh connection
   connection {
-    user        = "${var.MQV9Node01-os_admin_user == "" ? lookup(var.default_os_admin_user, var.MQV9Node01-image) : var.MQV9Node01-os_admin_user}"
+    user        = "${var.MQV9Node01-os_admin_user}"
     private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
   }
 
@@ -470,15 +460,15 @@ EOF
 }
 
 #########################################################
-##### Resource : MQV9Node01_byos-runmqsc
+##### Resource : MQV9Node01_byo-runmqsc
 #########################################################
 
-resource "null_resource" "MQV9Node01_byos-runmqsc" {
+resource "null_resource" "MQV9Node01_byo-runmqsc" {
   depends_on = ["camc_softwaredeploy.MQV9Node01_wmq_create_qmgrs"]
 
   # Specify the ssh connection
   connection {
-    user        = "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, var.MQV9Node01-image) : var.MQV9Node01-os_admin_user}"
+    user        = "${var.MQV9Node01-os_admin_user}"
     private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
     host        = "${var.MQV9Node01-mgmt-network-public == "false" ? ibm_compute_vm_instance.MQV9Node01.ipv4_address_private : ibm_compute_vm_instance.MQV9Node01.ipv4_address}"
   }
@@ -516,11 +506,11 @@ EOF
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-      "bash -c 'chmod +x MQV9Node01_byos-runmqsc.properties'",
-      "bash -c '. ./MQV9Node01_byos-runmqsc.properties'",
-      "bash -c 'chmod +x MQV9Node01_byos-runmqsc.sh'",
-      "bash -c './MQV9Node01_byos-runmqsc.sh  >> MQV9Node01_byos-runmqsc.log 2>&1'",
-      "bash -c 'rm MQV9Node01_byos-runmqsc.properties'",
+      "sudo bash -c 'chmod +x MQV9Node01_byos-runmqsc.properties'",
+      "sudo bash -c '. ./MQV9Node01_byos-runmqsc.properties'",
+      "sudo bash -c 'chmod +x MQV9Node01_byos-runmqsc.sh'",
+      "sudo bash -c './MQV9Node01_byos-runmqsc.sh  >> MQV9Node01_byos-runmqsc.log 2>&1'",
+      "sudo bash -c 'rm MQV9Node01_byos-runmqsc.properties'",
     ]
   }
 }
@@ -539,7 +529,7 @@ resource "camc_bootstrap" "MQV9Node01_chef_bootstrap_comp" {
 
   data = <<EOT
 {
-  "os_admin_user": "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, var.MQV9Node01-image) : var.MQV9Node01-os_admin_user}",
+  "os_admin_user": "${var.MQV9Node01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.MQV9Node01-mgmt-network-public == "false" ? ibm_compute_vm_instance.MQV9Node01.ipv4_address_private : ibm_compute_vm_instance.MQV9Node01.ipv4_address}",
@@ -572,7 +562,7 @@ resource "camc_softwaredeploy" "MQV9Node01_wmq_create_qmgrs" {
 
   data = <<EOT
 {
-  "os_admin_user": "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, var.MQV9Node01-image) : var.MQV9Node01-os_admin_user}",
+  "os_admin_user": "${var.MQV9Node01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.MQV9Node01-mgmt-network-public == "false" ? ibm_compute_vm_instance.MQV9Node01.ipv4_address_private : ibm_compute_vm_instance.MQV9Node01.ipv4_address}",
@@ -628,7 +618,7 @@ resource "camc_softwaredeploy" "MQV9Node01_wmq_v9_install" {
 
   data = <<EOT
 {
-  "os_admin_user": "${var.MQV9Node01-os_admin_user == "default"? lookup(var.default_os_admin_user, var.MQV9Node01-image) : var.MQV9Node01-os_admin_user}",
+  "os_admin_user": "${var.MQV9Node01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.MQV9Node01-mgmt-network-public == "false" ? ibm_compute_vm_instance.MQV9Node01.ipv4_address_private : ibm_compute_vm_instance.MQV9Node01.ipv4_address}",

@@ -12,10 +12,6 @@
       "label": "Cloud Input Variables"
     },
     {
-      "name": "virtualmachine",
-      "label": "Virtual Machine Input Variables"
-    },
-    {
       "name": "ssh_keys",
       "label": "SSH Keys"
     },
@@ -26,6 +22,10 @@
     {
       "name": "mqv9node01",
       "label": "MQV9Node01"
+    },
+    {
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Variables"
     }
   ],
   "output_groups": [
@@ -717,7 +717,7 @@
       "name": "MQV9Node01_memory",
       "type": "string",
       "description": "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024",
-      "default": 2048,
+      "default": 4096,
       "hidden": false,
       "label": "Virtual Machine Memory - MQV9Node01",
       "secured": false,
@@ -758,6 +758,18 @@
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
+    },
+    {
+      "name": "wmq_mqsc_script_url",
+      "type": "string",
+      "description": "MQ Script Url Path",
+      "default": "none",
+      "hidden": false,
+      "label": "Wmq Mqsc Script Url - MQV9Node01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "mqv9node01"
     },
     {
       "name": "MQV9Node01_cluster",
@@ -825,20 +837,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "ssh_keys"
-    },
-    {
-      "name": "wmq_mqsc_script_url",
-      "type": "string",
-      "description": "Generated",
-      "default": "none",
-      "hidden": false,
-      "label": "Wmq Mqsc Script Url - ungrouped",
-      "secured": false,
-      "required": true,
-      "immutable": false,
       "immutable_after_create": true,
-      "group_name": "mqv9node01"
+      "group_name": "ssh_keys"
     }
   ],
   "template_output_params": [
