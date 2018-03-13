@@ -1,5 +1,5 @@
 # Template - IBM MQ V9 with a custom script on a single virtual machine
-Template Version - 1.0
+Template Version - 2.0
 
 ## Description
 
@@ -10,10 +10,6 @@ Install and configure IBM MQ V9 on a single Linux virtual machine. Configuration
 ### Clouds
 
  IBM<br>
-<br>
-### Template Version
-
-1.0<br>
 <br>
 ### Operating Systems Supported
 
@@ -32,7 +28,7 @@ IBM MQ V9.0<br>
 <br>
 ### Default Virtual Machine Settings
 
- Cores 2, RAM (GB) 4, SAN Disk (GB) 25<br>
+ Cores 2, RAM (GB) 4, SAN Disk (GB) 100<br>
 <br>
 ### Usage and Special Notes
 
@@ -46,7 +42,7 @@ IBM MQ V9.0<br>
 
 ### License and Maintainer
 
-Copyright IBM Corp. 2016, 2017 
+Copyright IBM Corp. 2017, 2018 
 
 ### Target Cloud Type
 
@@ -64,10 +60,12 @@ IBM
 
 ### Minor Versions
 
-- IBM WebSphere MQSeries 8.0.04
-- IBM WebSphere MQSeries 8.0.05
-- IBM WebSphere MQSeries 8.0.06
+- IBM WebSphere MQSeries 8.0.0.4
+- IBM WebSphere MQSeries 8.0.0.5
+- IBM WebSphere MQSeries 8.0.0.6
+- IBM WebSphere MQSeries 8.0.0.8
 - IBM WebSphere MQSeries 9.0.0.1
+- IBM WebSphere MQSeries 9.0.0.2
 
 
 *Note, these represent base versions only, explicit fixpacks may also be added.*

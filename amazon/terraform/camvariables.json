@@ -1,11 +1,11 @@
 {
-  "input_namespaces": [
+  "input_datatypes": [
     {
       "name": "advanced_content_runtime_chef",
       "label": "Advanced Content Runtime"
     }
   ],
-  "output_namespace": "content_template_output",
+  "output_datatype": "content_template_output",
   "input_groups": [
     {
       "name": "cloud",
@@ -35,6 +35,17 @@
     }
   ],
   "template_input_params": [
+    {
+      "name": "ibm_stack_id",
+      "type": "string",
+      "description": "A unique stack id.",
+      "hidden": true,
+      "label": "A unique stack id.",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "environment"
+    },
     {
       "name": "ibm_stack_name",
       "type": "string",
@@ -156,7 +167,7 @@
       "name": "MQV9Node01_root_block_device_volume_size",
       "type": "string",
       "description": "AWS Root Block Device Volume Size",
-      "default": 100,
+      "default": "100",
       "hidden": false,
       "label": "AWS Root Block Device Volume Size",
       "secured": false,
@@ -276,17 +287,45 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_data_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Data files, recommended /var/mqm",
+      "default": "/var/mqm",
+      "hidden": false,
+      "label": "IBM MQ Data Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_fixpack",
       "type": "string",
       "description": "The fixpack of IBM MQ to install.",
-      "default": "1",
+      "default": "2",
       "hidden": false,
       "label": "IBM MQ Fixpack - MQV9Node01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
+      "max": "20",
+      "min": "1",
       "group_name": "mqv9node01"
+    },
+    {
+      "name": "wmq_v9_install_wmq_install_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Binaries, recommended /opt/mqm",
+      "default": "/opt/mqm",
+      "hidden": false,
+      "label": "IBM MQ Installation Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
     },
     {
       "name": "MQV9Node01_wmq_net_core_rmem_default",
@@ -432,6 +471,32 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_log_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Log Directory, recommended -> node[wmq][data_dir]/log",
+      "default": "/var/mqm/log",
+      "hidden": false,
+      "label": "IBM MQ Log Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_gid",
+      "type": "string",
+      "description": "Group ID of the Unix OS User for IBM MQ",
+      "default": "mqm",
+      "hidden": false,
+      "label": "IBM MQ OS Group ID",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_perms",
       "type": "string",
       "description": "Default permissions for IBM MQ files on Unix",
@@ -443,6 +508,58 @@
       "immutable": false,
       "immutable_after_create": true,
       "group_name": "mqv9node01"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_comment",
+      "type": "string",
+      "description": "Comment associated with the IBM MQ User",
+      "default": "MQseries User",
+      "hidden": false,
+      "label": "IBM MQ OS User Comment",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_home",
+      "type": "string",
+      "description": "Home Directory of Default OS User for IBM MQ User.",
+      "default": "/home/mqm",
+      "hidden": false,
+      "label": "IBM MQ OS User Home Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_shell",
+      "type": "string",
+      "description": "Location of the IBM MQ User Shell",
+      "default": "/bin/bash",
+      "hidden": false,
+      "label": "IBM MQ OS User Shell",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_name",
+      "type": "string",
+      "description": "Name of the Unix OS User that owns and controls IBM MQ",
+      "default": "mqm",
+      "hidden": false,
+      "label": "IBM MQ OS Username",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
     },
     {
       "name": "MQV9Node01_wmq_qmgr_qmgr1_description",
@@ -458,6 +575,19 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_qmgr_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Queue Manager Directory, recommended node[wmq][data_dir]/qmgrs",
+      "default": "/var/mqm/qmgrs",
+      "hidden": false,
+      "label": "IBM MQ Queue Manager Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_qmgr_qmgr1_listener_port",
       "type": "string",
       "description": "Port the Queue Manager listens on.",
@@ -468,6 +598,8 @@
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
+      "max": "50000",
+      "min": "1025",
       "group_name": "mqv9node01"
     },
     {
@@ -586,6 +718,18 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_os_users_mqm_ldap_user",
+      "type": "string",
+      "description": "A flag which indicates whether to create the MQ USer locally, or utilise an LDAP based user.",
+      "hidden": false,
+      "label": "IBM MQ Use LDAP for Authentication",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_version",
       "type": "string",
       "description": "The Version of IBM MQ to install, eg, 8.0",
@@ -642,6 +786,7 @@
       "secured": true,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
     },
@@ -654,6 +799,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo}"
     },
@@ -667,6 +813,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -679,7 +826,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "virtualmachine"
     },
     {
@@ -730,28 +876,6 @@
       "group_name": "mqv9node01"
     },
     {
-      "name": "MQV9Node01-mgmt-network-public",
-      "type": "string",
-      "description": "Expose and use public IP of virtual machine for internal communication",
-      "default": "true",
-      "hidden": false,
-      "label": "Use Public Management Network",
-      "secured": false,
-      "options": [
-        {
-          "value": false,
-          "label": false
-        },
-        {
-          "value": true,
-          "label": true
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
       "name": "wmq_mqsc_script_url",
       "type": "string",
       "description": "MQ Script Url Path",
@@ -786,6 +910,28 @@
       "immutable": true,
       "group_name": "ssh_keys",
       "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key_name}"
+    },
+    {
+      "name": "MQV9Node01-mgmt-network-public",
+      "type": "string",
+      "description": "Expose and use public IP of virtual machine for internal communication",
+      "default": "true",
+      "hidden": false,
+      "label": "Use Public Management Network",
+      "secured": false,
+      "options": [
+        {
+          "value": false,
+          "label": false
+        },
+        {
+          "value": true,
+          "label": true
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
     },
     {
       "name": "user_public_ssh_key",

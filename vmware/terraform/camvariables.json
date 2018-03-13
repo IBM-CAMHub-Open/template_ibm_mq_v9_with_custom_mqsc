@@ -1,11 +1,11 @@
 {
-  "input_namespaces": [
+  "input_datatypes": [
     {
       "name": "advanced_content_runtime_chef",
       "label": "Advanced Content Runtime"
     }
   ],
-  "output_namespace": "content_template_output",
+  "output_datatype": "content_template_output",
   "input_groups": [
     {
       "name": "cloud",
@@ -35,6 +35,17 @@
     }
   ],
   "template_input_params": [
+    {
+      "name": "ibm_stack_id",
+      "type": "string",
+      "description": "A unique stack id.",
+      "hidden": true,
+      "label": "A unique stack id.",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "environment"
+    },
     {
       "name": "ibm_stack_name",
       "type": "string",
@@ -139,17 +150,45 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_data_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Data files, recommended /var/mqm",
+      "default": "/var/mqm",
+      "hidden": false,
+      "label": "IBM MQ Data Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_fixpack",
       "type": "string",
       "description": "The fixpack of IBM MQ to install.",
-      "default": "1",
+      "default": "2",
       "hidden": false,
       "label": "IBM MQ Fixpack - MQV9Node01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
+      "max": "20",
+      "min": "1",
       "group_name": "mqv9node01"
+    },
+    {
+      "name": "wmq_v9_install_wmq_install_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Binaries, recommended /opt/mqm",
+      "default": "/opt/mqm",
+      "hidden": false,
+      "label": "IBM MQ Installation Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
     },
     {
       "name": "MQV9Node01_wmq_net_core_rmem_default",
@@ -295,6 +334,32 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_log_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Log Directory, recommended -> node[wmq][data_dir]/log",
+      "default": "/var/mqm/log",
+      "hidden": false,
+      "label": "IBM MQ Log Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_gid",
+      "type": "string",
+      "description": "Group ID of the Unix OS User for IBM MQ",
+      "default": "mqm",
+      "hidden": false,
+      "label": "IBM MQ OS Group ID",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_perms",
       "type": "string",
       "description": "Default permissions for IBM MQ files on Unix",
@@ -306,6 +371,58 @@
       "immutable": false,
       "immutable_after_create": true,
       "group_name": "mqv9node01"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_comment",
+      "type": "string",
+      "description": "Comment associated with the IBM MQ User",
+      "default": "MQseries User",
+      "hidden": false,
+      "label": "IBM MQ OS User Comment",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_home",
+      "type": "string",
+      "description": "Home Directory of Default OS User for IBM MQ User.",
+      "default": "/home/mqm",
+      "hidden": false,
+      "label": "IBM MQ OS User Home Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_shell",
+      "type": "string",
+      "description": "Location of the IBM MQ User Shell",
+      "default": "/bin/bash",
+      "hidden": false,
+      "label": "IBM MQ OS User Shell",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "wmq_v9_install_wmq_os_users_mqm_name",
+      "type": "string",
+      "description": "Name of the Unix OS User that owns and controls IBM MQ",
+      "default": "mqm",
+      "hidden": false,
+      "label": "IBM MQ OS Username",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
     },
     {
       "name": "MQV9Node01_wmq_qmgr_qmgr1_description",
@@ -321,6 +438,19 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_qmgr_dir",
+      "type": "string",
+      "description": "The directory to install IBM MQ Queue Manager Directory, recommended node[wmq][data_dir]/qmgrs",
+      "default": "/var/mqm/qmgrs",
+      "hidden": false,
+      "label": "IBM MQ Queue Manager Directory",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_qmgr_qmgr1_listener_port",
       "type": "string",
       "description": "Port the Queue Manager listens on.",
@@ -331,6 +461,8 @@
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
+      "max": "50000",
+      "min": "1025",
       "group_name": "mqv9node01"
     },
     {
@@ -449,6 +581,18 @@
       "group_name": "mqv9node01"
     },
     {
+      "name": "wmq_v9_install_wmq_os_users_mqm_ldap_user",
+      "type": "string",
+      "description": "A flag which indicates whether to create the MQ USer locally, or utilise an LDAP based user.",
+      "hidden": false,
+      "label": "IBM MQ Use LDAP for Authentication",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
       "name": "MQV9Node01_wmq_version",
       "type": "string",
       "description": "The Version of IBM MQ to install, eg, 8.0",
@@ -505,6 +649,7 @@
       "secured": true,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
     },
@@ -517,6 +662,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo}"
     },
@@ -530,6 +676,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -590,6 +737,18 @@
       "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key}"
     },
     {
+      "name": "MQV9Node01_root_disk_size",
+      "type": "string",
+      "description": "Size of template disk volume. Should be equal to template's disk size",
+      "default": "100",
+      "hidden": false,
+      "label": "Root Disk Size - MQV9Node01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "MQV9Node01-name",
       "type": "string",
       "description": "Short hostname of virtual machine",
@@ -614,79 +773,12 @@
       "group_name": "mqv9node01"
     },
     {
-      "name": "MQV9Node01_root_disk_controller_type",
-      "type": "string",
-      "description": "Type of template disk controller",
-      "default": "scsi",
-      "hidden": false,
-      "label": "Template Disk Controller - MQV9Node01",
-      "secured": false,
-      "options": [
-        {
-          "value": "scsi",
-          "label": "scsi",
-          "default": "true"
-        },
-        {
-          "value": "scsi-lsi-parallel",
-          "label": "scsi-lsi-parallel"
-        },
-        {
-          "value": "scsi-buslogic",
-          "label": "scsi-buslogic"
-        },
-        {
-          "value": "scsi-paravirtual",
-          "label": "scsi-paravirtual"
-        },
-        {
-          "value": "scsi-isi-sas",
-          "label": "scsi-isi-sas"
-        },
-        {
-          "value": "ide",
-          "label": "ide"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
       "name": "MQV9Node01_root_disk_datastore",
       "type": "string",
       "description": "Data store or storage cluster name for target virtual machine's disks",
       "hidden": false,
       "label": "Template Disk Datastore - MQV9Node01",
       "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "MQV9Node01_root_disk_type",
-      "type": "string",
-      "description": "Type of template disk volume",
-      "default": "eager_zeroed",
-      "hidden": false,
-      "label": "Template Disk Type - MQV9Node01",
-      "secured": false,
-      "options": [
-        {
-          "value": "eager_zeroed",
-          "label": "Thick Provision Eager Zeroed",
-          "default": "true"
-        },
-        {
-          "value": "lazy",
-          "label": "Thick Provision Lazy Zeroed"
-        },
-        {
-          "value": "thin",
-          "label": "Thin Provision",
-          "group_name": "virtualmachine"
-        }
-      ],
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
@@ -778,7 +870,7 @@
       "hidden": false,
       "label": "vSphere Cluster - MQV9Node01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -789,7 +881,7 @@
       "hidden": false,
       "label": "vSphere Datacenter - MQV9Node01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -800,7 +892,7 @@
       "hidden": false,
       "label": "vSphere Folder Name - MQV9Node01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -823,6 +915,17 @@
           "default": "e1000"
         }
       ],
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "MQV9Node01_resource_pool",
+      "type": "string",
+      "description": "Target vSphere Resource Pool to host the virtual machine",
+      "hidden": false,
+      "label": "vSphere Resource Pool - MQV9Node01",
+      "secured": false,
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
