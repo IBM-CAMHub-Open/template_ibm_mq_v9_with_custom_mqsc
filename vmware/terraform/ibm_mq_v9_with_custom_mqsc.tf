@@ -48,11 +48,11 @@ variable "allow_unverified_ssl" {
 ##############################################################
 provider "vsphere" {
   allow_unverified_ssl = "${var.allow_unverified_ssl}"
-  version = "~> 1.2"
+  version = "~> 1.3"
 }
 
 provider "camc" {
-  version = "~> 0.1"
+  version = "~> 0.2"
 }
 
 ##############################################################
