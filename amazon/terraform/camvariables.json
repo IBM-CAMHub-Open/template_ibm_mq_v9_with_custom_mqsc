@@ -133,7 +133,7 @@
         },
         {
           "value": "sa-east-1",
-          "label": "South America (São Paulo)"
+          "label": "South America (S\u00e3o Paulo)"
         }
       ],
       "required": true,
@@ -779,7 +779,7 @@
     },
     {
       "name": "ibm_sw_repo_password",
-      "type": "string",
+      "type": "password",
       "description": "IBM Software Repo Password",
       "hidden": true,
       "label": "IBM Software Repo Password",
