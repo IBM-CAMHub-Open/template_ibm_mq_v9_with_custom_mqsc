@@ -1,7 +1,7 @@
 {
     "name": "IBM MQ V9 with a custom script on a single virtual machine - Amazon EC2",
     "description": "Install and configure IBM MQ V9 on a single Linux virtual machine. Configuration includes a Queue Manager and executes a user defined script.",
-    "version": "2.0",
+    "version": "2.1",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",

@@ -1,5 +1,5 @@
 # Template - IBM MQ V9 with a custom script on a single virtual machine
-Template Version - 2.0
+Template Version - 2.1
 
 ## Description
 
