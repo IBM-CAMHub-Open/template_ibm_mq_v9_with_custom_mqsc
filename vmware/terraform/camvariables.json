@@ -1,4 +1,5 @@
 {
+  "terraform_engine": "~> 0.11.0",
   "input_datatypes": [
     {
       "name": "bastionhost",
@@ -152,28 +153,6 @@
       "label": "Bastion host key",
       "secured": false,
       "required": false
-    },    
-    {
-      "name": "ibm_stack_id",
-      "type": "string",
-      "description": "A unique stack id.",
-      "hidden": true,
-      "label": "A unique stack id.",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "environment"
-    },
-    {
-      "name": "ibm_stack_name",
-      "type": "string",
-      "description": "A unique stack name.",
-      "hidden": true,
-      "label": "A unique stack name.",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "environment"
     },
     {
       "name": "allow_unverified_ssl",
