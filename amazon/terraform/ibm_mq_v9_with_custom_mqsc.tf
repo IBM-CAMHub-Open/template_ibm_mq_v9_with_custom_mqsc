@@ -53,7 +53,7 @@ variable "aws_region" {
 ##############################################################
 provider "aws" {
   region = "${var.aws_region}"
-  version = "~> 1.2"
+  version = "~> 2.0"
 }
 
 provider "camc" {
