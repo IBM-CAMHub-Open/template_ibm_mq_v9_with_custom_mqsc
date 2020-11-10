@@ -221,7 +221,7 @@ variable "MQV9Node01_wmq_advanced" {
 variable "MQV9Node01_wmq_fixpack" {
   type        = "string"
   description = "The fixpack of IBM MQ to install."
-  default     = "2"
+  default     = "0"
 }
 
 #Variable : MQV9Node01_wmq_net_core_rmem_default
@@ -814,6 +814,7 @@ resource "camc_softwaredeploy" "MQV9Node01_wmq_v9_install" {
     },
     "wmq": {
       "advanced": "${var.MQV9Node01_wmq_advanced}",
+      "webhost": "${vsphere_virtual_machine.MQV9Node01.clone.0.customize.0.network_interface.0.ipv4_address}",
       "data_dir": "${var.wmq_v9_install_wmq_data_dir}",
       "fixpack": "${var.MQV9Node01_wmq_fixpack}",
       "global_mq_service": "true",
@@ -882,6 +883,9 @@ resource "camc_vaultitem" "VaultItem" {
 EOT
 }
 
+output "MQNode01_webconsole" {
+  value = "https://${vsphere_virtual_machine.MQV9Node01.clone.0.customize.0.network_interface.0.ipv4_address}:9443/ibmmq/console."
+}
 output "MQV9Node01_ip" {
   value = "VM IP Address : ${vsphere_virtual_machine.MQV9Node01.clone.0.customize.0.network_interface.0.ipv4_address}"
 }

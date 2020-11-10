@@ -24,7 +24,7 @@ Ubuntu 14.04 LTS<br>
 <br>
 ### Software Deployed
 
-IBM MQ V9.0<br>
+IBM MQ V9.0.5<br>
 <br>
 ### Default Virtual Machine Settings
 
@@ -42,7 +42,7 @@ IBM MQ V9.0<br>
 
 ### License and Maintainer
 
-Copyright IBM Corp. 2017, 2018 
+Copyright IBM Corp. 2017, 2020
 
 ### Target Cloud Type
 
@@ -64,8 +64,7 @@ VMware vSphere
 - IBM WebSphere MQSeries 8.0.0.5
 - IBM WebSphere MQSeries 8.0.0.6
 - IBM WebSphere MQSeries 8.0.0.8
-- IBM WebSphere MQSeries 9.0.0.1
-- IBM WebSphere MQSeries 9.0.0.2
+- IBM WebSphere MQSeries 9.0.5.0
 
 
 *Note, these represent base versions only, explicit fixpacks may also be added.*
@@ -242,13 +241,13 @@ The following files are neccessary on the Software Repository to successfully in
     <td>9.0</td>
     <td>Redhat X86_64</td>
     <td>/wmq/v9.0/base</td>
-    <td><br>IBM_MQ_9.0.0.0_LINUX_X86-64.tar.gz</br></td>
+    <td><br>IBM_MQ_9.0.5.0_LINUX_X86-64.tar.gz</br></td>
   </tr>
   <tr>
     <td>9.0</td>
     <td>Debian X86_64</td>
     <td>/wmq/v9.0/base</td>
-    <td><br>IBM_MQ_9.0.0.0_LINUX_X86-64.tar.gz</br></td>
+    <td><br>IBM_MQ_9.0.5.0_LINUX_X86-64.tar.gz</br></td>
   </tr>
 </table>
 
@@ -259,18 +258,6 @@ The following files are neccessary on the Software Repository to successfully in
     <th>Arch</th>
     <th>Repository Root</th>
     <th>File</th>
-  </tr>
-  <tr>
-    <td>9.0.X</td>
-    <td>Redhat X86_64</td>
-    <td>/wmq/v90/maint</td>
-    <td><br>9.0.0-IBM-MQ-LinuxX64-FP000#X.tar.gz</br></td>
-  </tr>
-  <tr>
-    <td>9.0.X</td>
-    <td>Debian X86_64</td>
-    <td>/wmq/v90/maint</td>
-    <td><br>9.0.0-IBM-MQ-LinuxX64-FP000#X.tar.gz</br></td>
   </tr>
   <tr>
     <td>8.0.0.X</td>

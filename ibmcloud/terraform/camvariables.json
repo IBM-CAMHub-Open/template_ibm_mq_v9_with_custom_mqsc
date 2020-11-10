@@ -151,7 +151,7 @@
       "name": "MQV9Node01_wmq_fixpack",
       "type": "string",
       "description": "The fixpack of IBM MQ to install.",
-      "default": "2",
+      "default": "0",
       "hidden": false,
       "label": "IBM MQ Fixpack - MQV9Node01",
       "secured": false,
@@ -1158,6 +1158,15 @@
     }
   ],
   "template_output_params": [
+    {
+      "name": "MQNode01_webconsole",
+      "label": "IBM MQ Console (mqadmin/mqadmin to login to console)",
+      "description": "IBM MQ Console, use mqadmin/mqadmin to login to console.",
+      "type": "url",
+      "hidden": false,
+      "secured": false,
+      "group_name": "content_template_output"
+    },     
     {
       "name": "MQV9Node01_ip",
       "label": "IP Addresss",
